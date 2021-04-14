@@ -36,6 +36,12 @@ const TEAM: Teams[] =  [
     role: 'Developer',
     description: 'Настроил Бекенд и всю работу с ним, реализовал авторизацию и разавторизацию.',
   },
+  {
+    id: 5,
+    name: 'Ксения Фисюк',
+    role: 'Designer',
+    description: 'Реализовала дизайн всего проекта.',
+  },
 ];
 
 export {TEAM};

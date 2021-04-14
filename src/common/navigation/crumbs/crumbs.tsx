@@ -10,7 +10,7 @@ interface CrumbsProps {
 const Crumbs: React.FC<CrumbsProps> = ({path}) => {
   const pathComponent: RegExpMatchArray | null = path.match(/[^\/][\w]*/g);
   let currentPath: string = '/';
-
+console.log(path)
   return (
     <div className='crumbs'>
       <NavLink to={currentPath} key='main'>
@@ -29,10 +29,19 @@ const Crumbs: React.FC<CrumbsProps> = ({path}) => {
         const numberSprint: any = path.match(/^sprint/) && Number(path.slice(6, 8));
         const isSprint: boolean = numberSprint || numberSprint === 0;
 
+        const isDictionary: any = path.match(/^dictionary$/);
+        const isHard: any = path.match(/hard$/);
+        const isDeleted: any = path.match(/deleted$/);
+        const isLearning: any = path.match(/learning$/);
 
-        const namePath: string = (isGroup && `${levelsEnglish[numberGroup-1].title} ${levelsEnglish[numberGroup-1].name}`) ||
+        const namePath: string =
+          (isGroup && `${levelsEnglish[numberGroup-1].title} ${levelsEnglish[numberGroup-1].name}`) ||
           (isPage && `${namesPath['page']} ${numberPage}`) ||
           (isSprint && `${namesPath['sprint']} ${numberSprint}`) ||
+          (isDictionary && `${namesPath['dictionary']}`) ||
+          (isHard && `${namesPath['hard']}`) ||
+          (isDeleted && `${namesPath['deleted']}`) ||
+          (isLearning && `${namesPath['learning']}`) ||
           namesPath[path];
 
         const classGroup: string = isGroup ? `crumbs__btn crumbs__btn--${numberGroup-1}` : '';

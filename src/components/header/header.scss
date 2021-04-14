@@ -30,6 +30,14 @@
 
   &__logo {
     font-size: 44px;
+
+    &:last-child {
+      fill: $yellow-color; 
+    }
+
+    &--auth:last-child {
+      fill: $green-color;
+    }
   }
 }
 
@@ -54,10 +62,10 @@
     }
 
     &-green {
-      background-color: $savahna-color;
+      background-color: $green-color;
 
       &:hover {
-        box-shadow: 2px 2px 0px 0px $savahna-color inset, -2px -2px 0px 0px $savahna-color inset;
+        box-shadow: 2px 2px 0px 0px $green-color inset, -2px -2px 0px 0px $green-color inset;
         background-color: $white-color;
       }
     }

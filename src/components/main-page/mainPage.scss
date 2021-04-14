@@ -30,6 +30,10 @@
   &__video-btn {
     margin-top: 76px;
     @include button-default;
+
+    &--auth:hover {
+      background-color: $green-color;
+    }
   }
 
   &__bg-wrapper {

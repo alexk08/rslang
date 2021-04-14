@@ -1,8 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import {MainPageNav} from '../main-page-nav';
 
-const MainPage: React.FC = () => {
+interface MainPageProps {
+  isAuth: boolean
+}
+
+const MainPageRedux: React.FC<MainPageProps> = ({ isAuth }) => {
+  const clazz = isAuth ? 'main-page__video-btn--auth' : '';
   return (
       <main className="main-page">
         <h1 className="visually-hidden">Главная страница</h1>
@@ -14,7 +20,7 @@ const MainPage: React.FC = () => {
             Традиционные и новые эффективные подходы к изучению слов, мотивация в виде статистики,
             различные уровни сложности - все это ты найдешь в RSLang.
           </p>
-          <button className="main-page__video-btn btn">Смотреть видео</button>
+          <button className={`main-page__video-btn ${clazz} btn`}>Смотреть видео</button>
         </section>
         <div className="main-page__bg-wrapper">
           <MainPageNav/>
@@ -22,5 +28,11 @@ const MainPage: React.FC = () => {
       </main>
   );
 }
+
+const mapStateToProps = (state: any) => ({
+  isAuth: state.login.isAuth
+});
+
+const MainPage = connect(mapStateToProps)(MainPageRedux);
 
 export {MainPage};

@@ -13,7 +13,7 @@ interface SignUpProps {
     error: string | null,
     toggleSignUpOpen: (isSignUpOpen: boolean) => void,
     signUpUser: (name: string | null, id: string | null, email: string | null, photo: string | null) => void,
-    loginUser: (name: string | null, userId: string | null, photo: string | null, isAuth: boolean) => void,
+    loginUser: (name: string | null, userId: string | null, photo: string | null, isAuth: boolean, token: string | null) => void,
     setSignUpError: (error: string | null) => void,
 }
 
@@ -39,7 +39,7 @@ const SignUpFormRedux: React.FC<SignUpProps> = ({ isSignUpOpen, handleSubmit, re
         } else {
             setSignUpError(null);
             signUpUser(content.name, content.id, content.email, content.photo ? content.photo : null);
-            loginUser(content.name, content.id, content.photo ? content.photo : null, true);
+            loginUser(content.name, content.id, content.photo ? content.photo : null, true, content.token);
             toggleSignUpOpen(false);
         }
     }
@@ -101,8 +101,8 @@ const mapDispatchToProps = (dispatch: any) => ({
     signUpUser: (name: string | null, id: string | null, email: string | null, photo: string | null) => {
         dispatch(signUpUser(name, id, email, photo));
     },
-    loginUser: (name: string | null, userId: string | null, photo: string | null, isAuth: boolean) => {
-        dispatch(loginUser(name, userId, photo, isAuth));
+    loginUser: (name: string | null, userId: string | null, photo: string | null, isAuth: boolean, token: string | null) => {
+        dispatch(loginUser(name, userId, photo, isAuth, token));
     },
     setSignUpError: (error: string | null) => {
         dispatch(setSignUpError(error));

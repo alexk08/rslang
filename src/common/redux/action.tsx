@@ -22,4 +22,12 @@ const toggleOpen = (e: boolean) => {
   };
 };
 
-export { toggleTranslate, toggleButtons, toggleOpen };
+const toggleGameOpen = (e: boolean) => {
+  return {
+    type: 'GAME_OPEN',
+    value: e,
+    payload: e,
+  };
+};
+
+export { toggleTranslate, toggleButtons, toggleOpen, toggleGameOpen };

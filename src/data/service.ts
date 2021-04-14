@@ -1,7 +1,7 @@
 import { WordsProps } from "../common/ts/interfaces";
 import {urlBackend} from "./index";
 
-const url: string = `https://react-rs-lang-words.herokuapp.com/words?all=true`;
+const url: string = `${urlBackend}words?all=true`;
 
 export const getData = async (): Promise<Array<WordsProps>> => {
 

@@ -1,10 +1,11 @@
 import { WordsProps } from "../common/ts/interfaces";
+import {urlBackend} from "./index";
 
 const getDataPage = async (
   group: string | number,
   page?: number
 ): Promise<WordsProps[]> => {
-  const url = `https://react-rs-lang-words.herokuapp.com/words?group=${group}&page=${page}`;
+  const url = `${urlBackend}words?group=${group}&page=${page}`;
 
   const res = await fetch(`${url}`);
 

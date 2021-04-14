@@ -7,8 +7,8 @@ import { Settings } from "../settings";
 import { LoginForm } from '../loginform';
 import { SignUpForm } from '../signupform';
 
-
 const App: React.FC = () => {
+
   return (
     <BrowserRouter>
       <Header />
