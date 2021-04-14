@@ -6,11 +6,11 @@ import {connect} from "react-redux";
 
 interface MainPageNavProps {
   toggleOpen: any,
-  isAuth: boolean
 }
 
-const MainPageNavRedux: React.FC<MainPageNavProps> = ({toggleOpen, isAuth}) => {
+const MainPageNavRedux: React.FC<MainPageNavProps> = ({toggleOpen}) => {
   let mainPageNav: string[];
+  const isAuth: boolean = false;
 
   isAuth ?
     mainPageNav = ["Учебник", "Мини-игры", "Словарь", "Статистика", "Настройка"] :
@@ -37,9 +37,5 @@ const mapDispatchToProps = {
   toggleOpen,
 };
 
-const mapStateToProps = (state: any) => ({
-  isAuth: state.login.isAuth
-});
-
-const MainPageNav = connect(mapStateToProps, mapDispatchToProps)(MainPageNavRedux);
+const MainPageNav = connect(null, mapDispatchToProps)(MainPageNavRedux);
 export {MainPageNav};

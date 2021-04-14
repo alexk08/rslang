@@ -1,8 +1,6 @@
 import {levelsEnglish} from "./levelsEnglish";
 import {getDataPage} from "./WORDS";
-import {TEAM} from './TEAM';
-import {githubMembers, githubSrc, urlBackend, navLink, descriptionGroup, titleGroup, menuLinks, dictionaryLinks, titleGames, DICTIONARY_TITLES, WORDS_ON_PAGE} from './CONSTANTS';
-
+import {githubMembers, githubSrc, urlBackend, navLink, descriptionGroup, titleGroup, menuLinks, titleGames} from './CONSTANTS';
 import {TEAM} from './TEAM';
 import {setData} from "./service";
 

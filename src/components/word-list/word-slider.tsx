@@ -18,40 +18,21 @@ interface WordSliderProps {
   onHardWordClick: (word: WordsProps) => void,
   onDeleteHardWordClick: (id: string) => void,
   onDeleteWordClick: (word: WordsProps) => void,
-  isDictionary?: boolean,
-  dictionaryWords?: any
 }
 
 const audio = new Audio();
 
-const WordSliderRedux: React.FC<WordSliderProps> = ({group, page, isDictionary = false, dictionaryWords = [], isTranslate, areButtons, hardWords, deletedWords, getWords, onHardWordClick, onDeleteHardWordClick, onDeleteWordClick}) => {
+const WordSliderRedux: React.FC<WordSliderProps> = ({group, page, isTranslate, areButtons, hardWords, deletedWords, getWords, onHardWordClick, onDeleteHardWordClick, onDeleteWordClick}) => {
   const [words, setWords] = useState<WordsProps[]>([]);
   const [isMessage, setMessage] = useState<boolean>(false);
 
   useEffect(() => {
-<<<<<< dictionary
-    setWordsRedux(getWords);
-  }, [getWords]);
+    setWords([]);
+    getDataPage(group - 1, page).then((res: WordsProps[]) => getWordsWithoutDeleted(res));
+  }, [page, group, deletedWords]);
 
-
-  useEffect(() => {
-    if (isDictionary) {
-      if (page >= 0) {
-        setWords(dictionaryWords[page]);
-        setMessage(false);
-      }
-      console.log('словарь')
-    } else {
-      setWords([]);
-      getDataPage(group - 1, page).then((res: WordsProps[]) => getWordsWithoutDeleted(res));
-      console.log('учебник')
-    }
-  }, [page, group, isDelete, isDictionary]);
-
-
-  const getWordsWithoutDeleted: any = (words: any) => {
+  const getWordsWithoutDeleted: (words: any) => any = (words: any) => {
     const wordsWithoutDeleted = words.filter((word: WordsProps) => deletedWords.findIndex((deletedWord: WordsProps) => deletedWord.id === word.id) === -1);
-
     if (!wordsWithoutDeleted.length) {
       const option = document.getElementsByTagName('option')[page + 1];
       option.hidden = true;
