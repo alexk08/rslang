@@ -1,0 +1,58 @@
+.over-settings {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+
+.settings {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  padding: 50px 32px;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 4px 4px 4px 4px $default-color;
+  z-index: 3;
+
+  &:hover {
+    box-shadow: 4px 4px 4px 6px $default-color;
+  }
+
+  img {
+    position: absolute;
+    top: 5%;
+    right: 2%;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+
+  p {
+    text-align: center;
+    @include body-text-xl;
+    padding-bottom: 25px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      padding: 15px 0;
+      @include body-text-l;
+
+      input {
+        width: 20px;
+        height: 20px;
+        margin: 5px;
+      }
+    }
+  }
+}
