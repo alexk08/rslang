@@ -26,8 +26,12 @@ const audio = new Audio();
 
 const WordSliderRedux: React.FC<WordSliderProps> = ({group, page, isDictionary = false, dictionaryWords = [], isTranslate, areButtons, hardWords, deletedWords, getWords, onHardWordClick, onDeleteHardWordClick, onDeleteWordClick}) => {
   const [words, setWords] = useState<WordsProps[]>([]);
-  const [isDelete, setIsDelete] = useState<number>(0);
   const [isMessage, setMessage] = useState<boolean>(false);
+
+  useEffect(() => {
+<<<<<< dictionary
+    setWordsRedux(getWords);
+  }, [getWords]);
 
 
   useEffect(() => {
@@ -40,7 +44,7 @@ const WordSliderRedux: React.FC<WordSliderProps> = ({group, page, isDictionary =
     } else {
       setWords([]);
       getDataPage(group - 1, page).then((res: WordsProps[]) => getWordsWithoutDeleted(res));
-      console.log(words)
+      console.log('учебник')
     }
   }, [page, group, isDelete, isDictionary]);
 

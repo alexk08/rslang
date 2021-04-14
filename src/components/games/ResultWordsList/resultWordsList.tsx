@@ -22,7 +22,6 @@ const ResultWordsList: React.FC<ResultWordsListProps> = ({errorList, correctList
           )
         })
       }
-      <div className = 'result-list__separator'></div>
       <h4 className = 'result-list__header result-list__header--correct'>{`Знаю : ${correctList.length}`}</h4>
       {
         correctList.map((word : WordsProps, index : number) => {
