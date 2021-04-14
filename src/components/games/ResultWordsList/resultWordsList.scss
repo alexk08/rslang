@@ -1,29 +1,35 @@
+@import '../../../styles/vars.scss';
+
 .game__results {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 300px;
   &--list {
     overflow-y: scroll;
     align-items: flex-start;
     width: 100%;
+    height: 19.5rem;
+    padding-left: 2rem;
     .result-list__header {
       margin-left: 1rem;
       margin-top: 1rem;
       &--correct {
-        color: green;
+        color: $correct-color; 
       }
       &--error {
-        color: red;
+        color: $error-color;
       }
     }
     .result-list__item {
       margin-left: 10px;
       display: flex;
-      margin-top: 3px;
+      align-items: center;
       .result-list__item--bold {
         font-weight: 700;
       }
+    }
+    .result-list__separator {
+      width: 50%;
+      height: 2px;
+      margin-top: 1rem;
+      background: #323232;
     }
   }
   span {

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { WordsProps } from '../../../common/ts/interfaces';
 import { getRandomOderArr, getRandomBoolean, getRandomInteger, playAnswer } from '../../../data/utils';
 import { Loader } from '../../loader';
-import { Crumbs } from "../../../common/navigation/crumbs";
 import { ResultsGame } from '../resultsGame';
 import { connect } from 'react-redux';
+import {setData} from '../../../data';
 
-let WORDS_GROUP_NEW : WordsProps[];
-let WORDS_GAME_NEW : WordsProps[];
+let WORDS_GROUP : WordsProps[];
+let WORDS_GAME : WordsProps[];
 
 let indexesWord : number[];
 let indexWord : number | undefined;
@@ -29,7 +29,7 @@ interface GameSprintProps {
   hard?: string | undefined,
 }
 
-const SprintRedax: React.FC<GameSprintProps> = ({words, hardWords, group, page, hard}) => {
+const SprintRedux: React.FC<GameSprintProps> = ({words, hardWords, group, page, hard}) => {
   // WORDS_GROUP - массив со словами, используемый в игре (или сложные слова и группа слов)
   const getWordsGroup = () => {
     if (hard) return hardWords;
@@ -39,8 +39,8 @@ const SprintRedax: React.FC<GameSprintProps> = ({words, hardWords, group, page, 
   // WORDS_GAME - массив со словами, используемый в игре с учетом номера страницы (сложные слова или игра из меню 
   // соответствует массиву WORDS_GROUP - иначе конкретная страница)
   const getWordsGame = () => {
-    if (page) return words.filter(item => item.page === page - round);
-    return WORDS_GROUP_NEW;
+    if (page !== undefined) return WORDS_GROUP.filter(item => item.page === page - round);
+    return WORDS_GROUP;
   }
 
   const [score, setScore] = useState<number>(0);
@@ -48,7 +48,6 @@ const SprintRedax: React.FC<GameSprintProps> = ({words, hardWords, group, page, 
   const [word, setWord] = useState<string>();
   const [wordTranslate, setWordTranslate] = useState<string>();
   const [mute, setMute] = useState<boolean>(false);
-  const location = useLocation();
   const colorsBase: string[] = ['#51BFA6', '#184656', '#F7CC7E', '#F57359'];
   const colorsNone: string = "rgba(255,255,255,0.37)";
   const [colors, setColors] = useState<string[]>(new Array(4).fill(colorsNone));
@@ -57,15 +56,16 @@ const SprintRedax: React.FC<GameSprintProps> = ({words, hardWords, group, page, 
 
   useEffect(() => {
     if(words.length) {
-      WORDS_GROUP_NEW = getWordsGroup();
-      WORDS_GAME_NEW = getWordsGame();
-      indexesWord = getRandomOderArr(WORDS_GAME_NEW.length);
+      WORDS_GROUP = getWordsGroup();
+      WORDS_GAME = getWordsGame();
+      console.log(WORDS_GAME);
+      indexesWord = getRandomOderArr(WORDS_GAME.length);
       indexWord = indexesWord.pop();
-      indexTranslate = getRandomBoolean() ? indexWord : getRandomInteger(WORDS_GAME_NEW.length);
-      setWord(WORDS_GAME_NEW[indexWord!].word);
-      setWordTranslate(WORDS_GAME_NEW[indexTranslate!].wordTranslate);
+      indexTranslate = getRandomBoolean() ? indexWord : getRandomInteger(WORDS_GAME.length);
+      setWord(WORDS_GAME[indexWord!].word);
+      setWordTranslate(WORDS_GAME[indexTranslate!].wordTranslate);
     }
-  }, [words])
+  }, [words]);
 
   useEffect(() => {
     const timerId = setInterval(() => {
@@ -95,8 +95,8 @@ const SprintRedax: React.FC<GameSprintProps> = ({words, hardWords, group, page, 
   }
 
   const changeBorder = (answer: boolean) => {
-    const border = document.querySelector('.frame');
-    const colorBorder = answer ? 'frame--correct' : 'frame--error';
+    const border = document.querySelector('.sprint-body__field');
+    const colorBorder = answer ? 'sprint-body__field--correct' : 'sprint-body__field--error';
     border?.classList.add(colorBorder);
     setTimeout(() => (border?.classList.remove(colorBorder)), 1000);
   }
@@ -106,14 +106,18 @@ const SprintRedax: React.FC<GameSprintProps> = ({words, hardWords, group, page, 
     playAnswer(answer === correctAnswer, mute);
     changeBorder(answer === correctAnswer);
     if (answer === correctAnswer) {
-      correctList.push(WORDS_GAME_NEW[indexWord!]);
+      WORDS_GAME[indexWord!].corrects += 1;
+      setData(WORDS_GAME[indexWord!], 'corrects', WORDS_GAME[indexWord!].corrects);
+      correctList.push(WORDS_GAME[indexWord!]);
       series += 1;
       seriesMax = (seriesMax < series) ? series : seriesMax;
       setColors(getColors(series));
       setIncrement(`+${Math.min(series * 20, 80)}`);
       setScore(score + Math.min(series * 20, 80));
     } else {
-      errorList.push(WORDS_GAME_NEW[indexWord!]);
+      WORDS_GAME[indexWord!].errorsCount += 1;
+      setData(WORDS_GAME[indexWord!], 'errorsCount', WORDS_GAME[indexWord!].errorsCount);
+      errorList.push(WORDS_GAME[indexWord!]);
       series = 0;
       setColors(getColors(series));
       setIncrement('');
@@ -121,17 +125,17 @@ const SprintRedax: React.FC<GameSprintProps> = ({words, hardWords, group, page, 
     if (indexesWord.length) {
       indexWord = indexesWord.pop();
       indexTranslate = getRandomBoolean() ? indexWord : getRandomInteger(19);
-      setWord(WORDS_GAME_NEW[indexWord!].word);
-      setWordTranslate(WORDS_GAME_NEW[indexTranslate!].wordTranslate);
+      setWord(WORDS_GAME[indexWord!].word);
+      setWordTranslate(WORDS_GAME[indexTranslate!].wordTranslate);
     } else {
-      indexesWord = getRandomOderArr(WORDS_GAME_NEW.length);
+      indexesWord = getRandomOderArr(WORDS_GAME.length);
       if (page! > round) {
         round += 1;
-        WORDS_GAME_NEW = getWordsGame();
+        WORDS_GAME = getWordsGame();
         indexWord = indexesWord.pop();
         indexTranslate = getRandomBoolean() ? indexWord : getRandomInteger(19);
-        setWord(WORDS_GAME_NEW[indexWord!].word);
-        setWordTranslate(WORDS_GAME_NEW[indexTranslate!].wordTranslate);
+        setWord(WORDS_GAME[indexWord!].word);
+        setWordTranslate(WORDS_GAME[indexTranslate!].wordTranslate);
       } else {
         setGameStatus(false);
       }
@@ -139,15 +143,16 @@ const SprintRedax: React.FC<GameSprintProps> = ({words, hardWords, group, page, 
   }
 
   const onClickHandlerNewGame = () => {
-    indexesWord = getRandomOderArr(WORDS_GAME_NEW.length);
+    indexesWord = getRandomOderArr(WORDS_GAME.length);
     indexWord = indexesWord.pop();
     indexTranslate = getRandomBoolean() ? indexWord : getRandomInteger(19);
     setGameStatus(true);
-    setWord(WORDS_GAME_NEW[indexWord!].word);
-    setWordTranslate(WORDS_GAME_NEW[indexTranslate!].wordTranslate);
+    setWord(WORDS_GAME[indexWord!].word);
+    setWordTranslate(WORDS_GAME[indexTranslate!].wordTranslate);
     correctList = [];
     errorList = [];
     series = 0;
+    seriesMax = 0;
     setColors(getColors(series));
     setScore(0);
   }
@@ -170,7 +175,6 @@ const SprintRedax: React.FC<GameSprintProps> = ({words, hardWords, group, page, 
 
   return (
     <>
-      <Crumbs path={location.pathname}/>
       <div className='sprint'>
         { words.length ?
           <React.Fragment>
@@ -184,20 +188,18 @@ const SprintRedax: React.FC<GameSprintProps> = ({words, hardWords, group, page, 
               </NavLink>
             </div>
               {gameStatus && (
-                <React.Fragment>
-                  <div className='sprint__info'>
+                <div className='sprint-body'>
+                  <div className='sprint-body__info'>
                     <div className='sprint-info__score'>
                       <p className='increment increment--first'>{increment}</p>
                       <p className='increment increment--second'>{increment}</p>
                       <p className='increment increment--third'>{increment}</p>
                       <p className='score-value'>{score}</p>
                     </div>
+                    <Series colors = {colors}/>
                     <Timer gameStatus={gameStatus}/>
                   </div>
-                  <div className='sprint__field'>
-                      <svg className='sprint-field__border' >
-                        <rect className='frame frame--none' x="0" y="0" width="100" height="100"></rect>
-                      </svg>
+                  <div className='sprint-body__field'>
                       <Series colors = {colors}/>
                       <div className='sprint-field__words'>
                         <p className='word'>{word}</p>
@@ -205,7 +207,7 @@ const SprintRedax: React.FC<GameSprintProps> = ({words, hardWords, group, page, 
                       </div>
                       <SprintAnswer onClickHandlerGame={onClickHandlerGame}/>
                   </div>
-                </React.Fragment>)}
+                </div>)}
               {!gameStatus  && ( <div className='sprint__field'>
                 <ResultsGame correctList={correctList} errorList={errorList} onClickHandlerNewGame={onClickHandlerNewGame}
                 seriesLength={seriesMax} score={score}/>
@@ -267,7 +269,7 @@ interface SeriesProps {
 }
 const Series: React.FC<SeriesProps> = ({colors}) => {
   return (
-    <svg className='sprint-field__series' width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className='sprint__series' width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M4.59575 0C2.06167 0 0 2.06167 0 4.59575V36.7148H9.19136V35.5596C9.19136 30.5055 13.3033 26.3936 18.3574 26.3936C23.4116 26.3936 27.5235 30.5055 27.5235 35.5596V36.7148H36.7148V25.2383C36.7148 23.9763 37.738 22.9532 39 22.9532H42.4404C44.9745 22.9532 47.0361 20.8915 47.0361 18.3574C47.0361 15.8233 44.9745 13.7617 42.4404 13.7617H39C37.738 13.7617 36.7148 12.7385 36.7148 11.4765V0H4.59575Z"
     fill={colors[0]}/>
     <path d="M59.6426 47.0361C62.1767 47.0361 64.2383 44.9745 64.2383 42.4404V39C64.2383 37.738 65.2615 36.7148 66.5235 36.7148H78V4.59575C78 2.06167 75.9383 0 73.4042 0H41.2852V9.19136H42.4404C47.4945 9.19136 51.6064 13.3033 51.6064 18.3574C51.6064 23.4116 47.4945 27.5235 42.4404 27.5235H41.2852V36.7148H52.7617C54.0237 36.7148 55.0468 37.738 55.0468 39V42.4404C55.0468 44.9745 57.1085 47.0361 59.6426 47.0361Z"
@@ -307,6 +309,6 @@ const mapStateToProps = (state: any) => ({
   hardWords: state.data.hardWords,
 });
 
-const Sprint = connect(mapStateToProps)(SprintRedax);
+const Sprint = connect(mapStateToProps)(SprintRedux);
 
 export { Sprint };

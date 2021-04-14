@@ -1,9 +1,10 @@
 .sprint {
   background: url('../../../data/images/bg-sprint.png') 100%/cover no-repeat;
-  //height: 100vh;
+  min-height: calc(100vh - 14rem);
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   color: white;
   &__header {
@@ -11,182 +12,258 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 96px;
+    height: 4rem;
     width: 100%;
     .sprint-header__icons {
       color: white;
-      font-size: 48px;
+      font-size: 2rem;
       &:hover {
         cursor: pointer;
       }
       &--sound {
-        margin-left: 200px;
+        margin-left: 12.5rem;
       }
       &--fullscreen {
-        margin-left: 48px;
-        margin-right: calc(100% - 522px);
+        margin-left: 2rem;
+        margin-right: calc(100% - 33rem);
       }
       &--close {
-        margin-right: 200px;
+        margin-right: 12.5rem;
       }
     }
   }
-
-  &__info {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 170px;
-    width: 605px;
-    margin-bottom: 16px;
-    .sprint-info__score {
+  .sprint-body {
+    &__info {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 7.5rem;
+      width: 35rem;
+      margin-bottom: 1rem;
+      .sprint-info__score {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 5rem;
+        .increment {
+          font-size: 1.5rem;
+          &--first {
+            opacity: 0.32;
+          }
+          &--second {
+            opacity: 0.65;
+          }
+          &--third {
+            opacity: 1;
+          }
+        }
+        .score-value {
+          font-size: 2rem;
+        }
+      }
+      .sprint-info__timer {
+        margin-left: 1rem;
+        width: 6rem;
+        .time-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-weight: 700;
+          color: white;
+          font-size: 2rem;
+        }
+      }
+    }
+    &__field {
+      background: rgba(75, 106, 93, 0.56);
+      position: relative;
+      width: 35rem;
+      max-height: 30rem;
+      height: calc(100vh - 30rem);
+      min-height: 270px;
+      margin-bottom: 3.5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      .increment {
-        font-size: 26px;
-        &--first {
-          opacity: 0.32;
-        }
-        &--second {
-          opacity: 0.65;
-        }
-        &--third {
-          opacity: 1;
-        }
+      justify-content: flex-end;
+      border: white 6px dashed;
+      &--correct {
+        animation: correct 1s linear 0s;
       }
-      .score-value {
-        font-size: 40px;
-      }
-    }
-    .sprint-info__timer {
-      margin-left: 1rem;
-      width: 100px;
-      .time-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-weight: 700;
-        color: white;
-        font-size: 30px;
-      }
-    }
-  }
-  &__field {
-    background: rgba(75, 106, 93, 0.56);
-    position: relative;
-    width: 605px;
-    height: 552px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 100px;
-    &--result {
-      margin-top: 170px;
-    }
-    .sprint-field__border {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      .frame {
-        fill: none;
-        stroke: white;
-        stroke-width: 8px;
-        width: 100%;
-        height: 100%;
-        stroke-dasharray: 20;
-        &--correct {
-          animation: correct 1s linear 0s;
-        }
-        &--error {
-          animation: error 1s linear 0s;
-        }
+      &--error {
+        animation: error 1s linear 0s;
       }
       @keyframes correct {
         0% {
-          stroke: white;
+          border: white 6px dashed;
         }
         50% {
-          stroke: $correct-color;
+          border: $correct-color 6px dashed;
         }
         100% {
-          stroke: white;
+          border: white 6px dashed;
         }
       }
       @keyframes error {
         0% {
-          stroke: white;
+          border: white 6px dashed;
         }
         50% {
-          stroke: $error-color;
+          border: $error-color 6px dashed;
         }
         100% {
-          stroke: white;
+          border: white 6px dashed;
         }
       }
-    }
-    .sprint-field__series {
-      margin-top: 48px;
-      .icon-container {
-        &:hover {
-          cursor: pointer;
+      .sprint__series {
+        display: none;
+      }
+      &--result {
+        margin-top: 7.5rem;
+      }
+      .sprint-field__series {
+        margin-top: 3rem;
+        .icon-container {
+          &:hover {
+            cursor: pointer;
+          }
         }
       }
-    }
-    .sprint-field__words {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 2;
-      .word {
-        font-size: 60px;
-        line-height: 72.61px;
-        margin-bottom: 15px;
-      }
-      .translate {
-        font-size: 30px;
-        line-height: 36.31px;
-      }
-    }
-    .sprint-field__answer {
-      display: flex;
-      flex-direction: row;
-      //width: 300px;
-      height: 111px;
-      justify-content: space-evenly;
-      margin-bottom: 56.54px;
-      z-index: 2;
-      .sprint-field-answer__item {
+      .sprint-field__words {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
-        justify-content: space-between;
+        z-index: 2;
+        .word {
+          font-size: 3rem;
+          margin-bottom: 1rem;
+        }
+        .translate {
+          font-size: 2rem;
+        }
       }
-    }
-    .sprint-field-answer {
-      display: flex;
-      &__button {
-        height: 55px;
-        width: 218px;
-        &:hover {
-          cursor: pointer;
+      .sprint-field__answer {
+        display: flex;
+        flex-direction: row;
+        //height: 6rem;
+        justify-content: space-evenly;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        z-index: 2;
+      }
+      .sprint-field-answer {
+        display: flex;
+        &__item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
         }
-        &.button--false {
-          background: $error-color;
-          margin-right: 15px;
-        }
-        &.button--true {
-          background: $correct-color;
-          margin-left: 15px;
+        &__button {
+          height: 3rem;
+          width: 10rem;
+          margin-bottom: 1rem;
+          &:hover {
+            cursor: pointer;
+          }
+          &.button--false {
+            background: $error-color;
+            margin-right: 1rem;
+          }
+          &.button--true {
+            background: $correct-color;
+            margin-left: 1rem;
+          }
         }
       }
     }
   }
 }
 
+@media (min-height: 1080px), (max-width: $tablet-width) {
+  .sprint {
+    justify-content: flex-start;
+    .sprint-body {
+      margin-top: 5rem;
+    }
+    &__header {
+      height: 4rem;
+      width: 100%;
+      .sprint-header__icons {
+        font-size: 2rem;
+        &--sound {
+          margin-left: 5rem;
+        }
+        &--fullscreen {
+          margin-left: 2rem;
+          margin-right: calc(100% - 18rem);
+        }
+        &--close {
+          margin-right: 5rem;
+        }
+      }
+    }
+    .sprint-body__field {
+      height: 30rem;
+      justify-content: space-between;
+      .sprint__series {
+        margin-top: 2.75rem;
+        display: block;
+      }
+    }
+    .sprint-body__info {
+      .sprint__series {
+        display: none;
+      }
+    }
+  }
+}
 
+@media (max-width: $mobile-width) {
+  .sprint {
+    justify-content: flex-start;
+    min-height: fit-content;
+    &__header {
+      .sprint-header__icons {
+        font-size: 2rem;
+        &:hover {
+          cursor: pointer;
+        }
+        &--sound {
+          margin-left: 2rem;
+        }
+        &--fullscreen {
+          margin-left: 2rem;
+          margin-right: calc(100% - 14rem);
+        }
+        &--close {
+          margin-right: 2rem;
+        }
+      }
+    }
+    .sprint-body {
+      &__info {
+        width: 26rem;
+        margin-bottom: 1rem;
+        .sprint-info__score {
+          width: 5rem;
+          .increment {
+            font-size: 1.5rem;
+          }
+          .score-value {
+            font-size: 2rem;
+          }
+        }
+      }
+      &__field {
+        width: 26rem;
+        &--result {
+          margin-top: 7.5rem;
+        }
+      }
+    }
+  }
+}
 

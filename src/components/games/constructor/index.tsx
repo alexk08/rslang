@@ -1,3 +1,3 @@
-import {GameConstructor} from "./constructor";
+import {Constructor} from "./constructor";
 
-export {GameConstructor};
+export {Constructor};

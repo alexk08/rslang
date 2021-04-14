@@ -14,7 +14,7 @@ export const getData = async (): Promise<Array<WordsProps>> => {
   return await res.json();
 };
 
-const setData = (word: any, prop: any, value: boolean) => {
+const setData = (word: any, prop: any, value: boolean | number) => {
   word[prop] = value;
   const {id: newId, ...rest} = word;
   const newWord = {_id: newId, ...rest};

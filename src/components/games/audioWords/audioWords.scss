@@ -1,0 +1,24 @@
+.material-icons {
+  &:hover {
+    cursor: pointer;
+  }
+  &--audio {
+    padding: 0.25rem;
+    border-radius: 50%;
+    box-shadow: none;
+  }
+  &--play {
+    animation: play 2s linear 0s;
+  }
+  @keyframes play {
+    0% {
+      box-shadow:  0 0 0 26px transparent inset, 0 0 0 28px #9CC0FA inset;
+    }
+    50% {
+      box-shadow:  0 0 0 2px transparent inset, 0 0 0 4px #9CC0FA inset;
+    }
+    100% {
+      box-shadow:  0 0 0 2px transparent inset, 0 0 0 4px transparent inset;
+    }
+  }
+}

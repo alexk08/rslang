@@ -160,7 +160,7 @@
   }
 }
 
-@media (max-width: $tablet-width) {
+@media (max-width: $middle-width) {
   .games__select {
     grid-template-columns: 10rem 16rem 10rem;
     grid-template-rows: 10rem 16rem 10rem;
@@ -324,6 +324,3 @@
   }
 }
 
-.hidden {
-  display: none;
-}
