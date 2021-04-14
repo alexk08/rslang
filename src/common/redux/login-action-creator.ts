@@ -1,11 +1,12 @@
 const toggleLoginOpen = (isLoginOpen: boolean) => ({ type: 'TOGGLE_LOGIN_OPEN', payload: isLoginOpen });
 
-const loginUser = (name: string | null, userId: string | null, photo: string | null, isAuth: boolean) => {
+const loginUser = (name: string | null, userId: string | null, photo: string | null, isAuth: boolean, token: string | null) => {
     localStorage.user = JSON.stringify({
         name,
         userId,
         photo,
         isAuth,
+        token,
     });
 
     return {
@@ -15,6 +16,7 @@ const loginUser = (name: string | null, userId: string | null, photo: string | n
             userId,
             photo,
             isAuth,
+            token,
         }
     }
 };

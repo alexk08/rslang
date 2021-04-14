@@ -11,7 +11,7 @@ interface LoginProps {
     error: string | null,
     toggleLoginOpen: (isLoginOpen: boolean) => void,
     toggleSignUpOpen: (isLoginOpen: boolean) => void,
-    loginUser: (name: string, userId: string, photo: string | null, isAuth: boolean) => void,
+    loginUser: (name: string, userId: string, photo: string | null, isAuth: boolean, token: string | null) => void,
     setLoginError: (error: string | null) => void,
 }
 
@@ -31,10 +31,11 @@ const LoginFormRedux: React.FC<LoginProps> = ({ isLoginOpen, handleSubmit, error
             body: JSON.stringify(values)
         });
         const content = await response.json();
+        console.log(content);
         if (content.error) {
             setLoginError(content.error.errors[0].message);
         } else {
-            loginUser(content.name, content.userId, content.photo, true);
+            loginUser(content.name, content.userId, content.photo, true, content.token);
             toggleLoginOpen(false);
         }
     };
@@ -87,8 +88,8 @@ const mapDispatchToProps = (dispatch: any) => ({
     toggleSignUpOpen: (isSignUpOpen: boolean) => {
         dispatch(toggleSignUpOpen(isSignUpOpen));
     },
-    loginUser: (name: string, userId: string, photo: string | null, isAuth: boolean) => {
-        dispatch(loginUser(name, userId, photo, isAuth));
+    loginUser: (name: string, userId: string, photo: string | null, isAuth: boolean, token: string | null) => {
+        dispatch(loginUser(name, userId, photo, isAuth, token));
     },
     setLoginError: (error: string | null) => {
         dispatch(setLoginError(error));
