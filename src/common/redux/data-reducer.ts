@@ -63,7 +63,7 @@ const reducer = (state: InitialState = initialState, action: any) => {
         deletedWords: [...state.deletedWords, action.payload],
       };
     case `ADD_LEARNING_WORD`:
-      // console.log(action.payload);
+      console.log(action.payload);
       return {
         ...state,
         learningWords: [...state.learningWords, action.payload],

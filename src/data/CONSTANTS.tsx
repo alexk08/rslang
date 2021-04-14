@@ -48,21 +48,6 @@ const descriptionGroup: any = {
 
 const menuLinks: string[] = ['Главная', 'Учебник', 'Мини-игры', 'Словарь', 'Статистика', 'Настройка', 'О команде', 'Войти'];
 
-const dictionaryLinks: any[] = [
-  {
-    name: 'Изучаемые слова',
-    link: 'learning'
-  },
-  {
-    name: 'Сложные слова',
-    link: 'hard'
-  },
-  {
-    name: 'Удаленные слова',
-    link: 'deleted'
-  }
-];
-
 interface GamesProps {
   id: string;
   name: string;
@@ -105,19 +90,10 @@ const namesPath: any = {
   games: 'Игры',
   sprint: 'Спринт',
   team: 'О команде',
-  dictionary: 'Словарь',
-  hard: 'Сложные слова',
-  deleted: 'Удаленные слова',
-  learning: 'Изучаемые слова',
   statistics: 'Статистика',
 }
 
-const DICTIONARY_TITLES: any = {
-  'hard': 'Сложные',
-  'deleted': 'Удаленные',
-  'learning': 'Изучаемые'
-};
 
-const WORDS_ON_PAGE = 20;
+export {githubMembers, githubSrc, urlBackend, navLink, titleGroup, descriptionGroup, menuLinks, titleGames, namesPath};
 
-export {githubMembers, githubSrc, urlBackend, navLink, titleGroup, descriptionGroup, menuLinks, dictionaryLinks, titleGames, namesPath, DICTIONARY_TITLES, WORDS_ON_PAGE};
+
