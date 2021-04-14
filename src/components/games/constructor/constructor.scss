@@ -1,58 +1,49 @@
-.constructor {
-  background: url('../../../data/images/bg-ownGame.png') 100%/cover no-repeat;
-  min-height: calc(100vh - 14rem);
+.game-constructor {
+  background: $green-color;
   position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  &__header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 4rem;
-    width: 100%;
-    .constructor-header__icons {
-      color: white;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  &__stars {
+    margin-left: 1rem;
+
+    .star {
       font-size: 2rem;
-      &:hover {
-        cursor: pointer;
+      &--yellow {
+            color: $yellow-color;
       }
-      &--sound {
-        margin-left: 12.5rem;
-      }
-      &--fullscreen {
-        margin-left: 2rem;
-        margin-right: calc(100% - 45rem);
-      }
-      &--close {
-        margin-left: 2rem;
-        margin-right: 12.5rem;
+      &--pink {
+        color: $pink-color;
       }
     }
   }
   &__body {
-    background: rgba(227, 227, 227, 0.87);
-    width: 40rem;
-    height: 28rem;
+    background: #ffffff;
+    border-radius: 5px;
+    width: 470px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    margin-top: calc(50vh - 24rem);
     .constructor-body-game__translate {
       font-size: 2em;
-      margin-top: 2rem;
       font-weight: bold;
     }
-    .constructor-body-game__service {
-      font-size: 1rem;
-      width: 12.5rem;
-      height: 2rem;
+    .constructor-body-game__header {
       display: flex;
-      align-items: center;
+      flex-direction: row;
+      width: 250px;
       justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      .icon-container {
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
     .constructor-body-game__letters {
       display: flex;
@@ -61,16 +52,16 @@
       justify-content: center;
       align-content: center;
       &--question {
-        height: 12.5rem;
+        height: 200px;
       }
       .letter {
-        width: 2.25rem;
-        height: 2rem;
-        border: 2px dashed $constructor-color;
-        background: white;
+        width: 36px;
+        height: 30px;
+        border: 1px solid blue;
+        border-radius: 0.25rem;
         margin: 0.25rem;
         text-align: center;
-        padding-top: 0.25rem;
+        padding-top: 4px;
         transition: all 0.3s ease;
         &:hover {
           box-shadow: 0 0 0.7em rgba(0,0,0,0.5);
@@ -83,39 +74,28 @@
           }
         }
         &--open {
-          border: 2px dashed $correct-color;
+          background: $green-color;
+          color: white;
+          border: none;
         }
         &--question {
-          background: $constructor-color;
+          background: $blue-color;
+          color: white;
           border: none;
         }
         &--solved {
           opacity: 0;
         }
-        &--error {
-          animation: error-constructor 1s linear 0s;;
-        }
-        @keyframes error-constructor {
-          0% {
-            background: $constructor-color;
-          }
-          50% {
-            background: $error-color;
-          }
-          100% {
-            background: $constructor-color;
-          }
-        }
       }
     }
     .constructor-body-game__card {
-      height: 12.5rem;
+      height: 200px;
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
       align-items: center;
       img {
-        height: 6.25rem;
+        height: 100px;
       }
       p {
         margin: 0 1rem;
@@ -123,7 +103,6 @@
     }
     .constructor-body-game__control {
       display: flex;
-      width: 12.5rem;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
@@ -134,96 +113,19 @@
         align-items: center;
         align-content: flex-end;
         justify-content: space-evenly;
-        height: 2.5rem;
-        width: 7.5rem;
+        height: 40px;
+        width: 120px;
         background: $yellow-color;
         &:hover {
           cursor: pointer;
           background: none;
           box-shadow: 2px 2px 0px 0px $yellow-color inset, -2px -2px 0px 0px $yellow-color inset;
+          //border: 1px solid $yellow-color;
         }
       }
     }
   }
-}
-
-@media (max-width: $middle-width) {
-  .constructor {
-    &__header {
-      height: 4rem;
-      .constructor-header__icons {
-        font-size: 2rem;
-        &--sound {
-          margin-left: 7.5rem;
-        }
-        &--fullscreen {
-          margin-left: 2rem;
-          margin-right: calc(100% - 35rem);
-        }
-        &--close {
-          margin-left: 2rem;
-          margin-right: 7.5rem;
-        }
-      }
-    }
-    &__body {
-      width: 40rem;
-    }
-  }
-}
-
-@media (max-width: $tablet-width) {
-  .constructor {
-    &__header {
-      height: 4rem;
-      .constructor-header__icons {
-        font-size: 2rem;
-        &--sound {
-          margin-left: 5rem;
-        }
-        &--fullscreen {
-          margin-left: 2rem;
-          margin-right: calc(100% - 30rem);
-        }
-        &--close {
-          margin-left: 2rem;
-          margin-right: 5rem;
-        }
-      }
-    }
-    &__body {
-      width: 40rem;
-    }
-  }
-}
-
-@media (max-width: $mobile-width) {
-  .constructor {
-    &__header {
-      height: 4rem;
-      .constructor-header__icons {
-        font-size: 2rem;
-        &--sound {
-          margin-left: 3rem;
-        }
-        &--fullscreen {
-          margin-left: 2rem;
-          margin-right: calc(100% - 26rem);
-        }
-        &--close {
-          margin-left: 2rem;
-          margin-right: 3rem;
-        }
-      }
-    }
-    &__body {
-      width: 80%;
-    }
-  }
-}
-
-@media (max-height: 840px) {
-  .constructor__body {
-    margin: 1rem 0 2rem;
+  &__button-close {
+    margin-right: 1rem;
   }
 }
