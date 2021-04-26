@@ -1,0 +1,61 @@
+.dictionary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    font-size: 40px;
+    line-height: 42px;
+    font-weight: bold;
+  }
+
+  &__link {
+    margin: 10px;
+
+    min-width: 400px;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: 0.1s all;
+
+    &:hover {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+      transform: scale(1.01)
+    }
+
+    &--hard {
+      background-color: $red-color;
+    }
+
+    &--deleted {
+      background-color: $dark-blue-color;
+    }
+
+    &--learning {
+      background-color: $dark-green-color;
+    }
+
+    
+  }
+
+  &__category-name,
+  &__category-amount {
+    color: $white-color;
+    font-size: 30px;
+    line-height: 32px;
+  }
+  
+  &__category-name {
+    margin-bottom: 10px;
+  }
+
+  &__category-amount {
+    font-size: 36px;
+    line-height: 40px;
+    font-weight: bold;
+  }
+}

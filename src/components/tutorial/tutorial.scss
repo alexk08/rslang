@@ -1,0 +1,128 @@
+.game__icon {
+  width: 65px;
+  height: 65px;
+  margin: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5em;
+
+  &--1 {
+    background: $constructor-color;
+  }
+
+  &--2 {
+    background: $savahna-color;
+  }
+
+  &--3 {
+    background: $audio-color;
+  }
+
+  &--4 {
+    background: $sprint-color;
+  }
+}
+
+.tutorial {
+  display: flex;
+  width: $desktop-width;
+  margin: 0 auto 73px auto;
+
+  &__title {
+   @include title;
+  }
+
+  &__groups {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  &__description {
+    width: 600px;
+
+    &__title {
+      font-weight: 500;
+    }
+
+    & > * {
+      padding: 10px 0;
+    }
+  }
+
+  &__icons {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__icon {
+    width: 80%;
+    border-radius: 0.5em;
+
+    &:hover {
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+
+.group {
+  &__title {
+    font-size: 70px;
+    line-height: 85px;
+    padding-right: 20px;
+  }
+
+  &__description {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  &__word-count {
+    margin-left: auto;
+    font-size: 40px;
+    line-height: 50px;
+    color: red;
+  }
+
+  &--0 {
+    background-color: $light-green-color;
+  }
+
+  &--1 {
+    background-color: $green-color;
+  }
+
+  &--2 {
+    background-color: $pink-color;
+  }
+
+  &--3 {
+    background-color: $orange-color;
+  }
+
+  &--4 {
+    background-color: $light-blue-color;
+  }
+
+  &--5 {
+    background-color: $blue-color;
+  }
+}
+
+.group-btn {
+  display: flex;
+  align-items: baseline;
+  width: 420px;
+  padding: 0 28px;
+  margin: 10px;
+  @include button-unit;
+
+  @media (max-width: $middle-width) {
+
+  }
+  @media (max-width: $tablet-width) {
+
+  }
+}

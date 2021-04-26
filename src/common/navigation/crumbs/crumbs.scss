@@ -1,0 +1,49 @@
+.crumbs {
+  max-width: $desktop-width;
+  padding: 0 40px 40px 40px;
+  margin: 0 auto;
+  display: flex;
+
+
+  a {
+    display: flex;
+    align-items: center;
+    color: $disabled-color;
+
+    img {
+      padding: 0 8px;
+    }
+  }
+
+  &__btn {
+    padding: 5px 10px;
+
+    &--0 {
+      background-color: $light-green-color;
+    }
+
+    &--1 {
+      background-color: $green-color;
+    }
+
+    &--2 {
+      background-color: $pink-color;
+    }
+
+    &--3 {
+      background-color: $orange-color;
+    }
+
+    &--4 {
+      background-color: $light-blue-color;
+    }
+
+    &--5 {
+      background-color: $blue-color;
+    }
+  }
+}
+
+.actual-menu {
+  color: $default-color;
+}

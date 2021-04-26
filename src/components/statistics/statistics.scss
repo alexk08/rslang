@@ -1,0 +1,77 @@
+.statistics {
+  max-width: $desktop-width;
+  margin: 0 auto;
+
+  &__title {
+    @include title;
+  }
+
+  &__cards {
+    display: flex;
+    justify-content: space-around;
+    //padding: 20px 20px 50px 20px;
+
+    & > * {
+      text-align: center;
+      @include body-text-sm;
+
+      p:last-child {
+        padding-bottom: 130px;
+      }
+
+      .number-learned {
+        font-size: 100px;
+        padding-bottom: 30px;
+        color: $savahna-color;
+      }
+
+      .number-right {
+        font-size: 100px;
+        padding-bottom: 30px;
+        color: $constructor-color;
+      }
+    }
+  }
+}
+
+.inner-wrapper {
+  padding: 0 150px;
+}
+
+.inner-statistics {
+  padding-right: 150px;
+}
+
+ .item-settings:not(:first-child) {
+  & > * {
+    padding: 25px 0;
+    @include body-text-xl;
+  }
+}
+.items {
+  & > * {
+    padding: 33px 0;
+    font-size: 16px;
+    color: $secondary-color;
+  }
+}
+
+.settings-icon {
+  width: 100px;
+  height: 100px;
+}
+
+.diagramms {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
+}
+
+.statistic {
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}

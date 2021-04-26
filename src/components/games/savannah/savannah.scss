@@ -1,0 +1,78 @@
+@keyframes flow {
+  100% {
+    top: 35%;
+  }
+}
+
+@keyframes resizing {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.flow-animation {
+  animation: flow 5s linear;
+  animation-fill-mode: forwards;
+}
+
+.savannah {
+  &.minigames {
+    background: url("../../../data/images/savannah-bg.jpg") no-repeat;
+    background-position-y: bottom;
+    background-position-x: center;
+  }
+
+  
+
+  &__word {
+    position: absolute;
+    left: 50%;
+    top: 0%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #fff;
+    font-size: 45px;
+    font-weight: 400;
+  }
+
+  &__sun-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__sun {
+    position: absolute;
+    bottom: 6vh;
+    margin: 0 auto;
+    text-align: center;
+    animation: resizing 1s infinite;
+  }
+}
+
+@media (max-width: $middle-width) {
+  .savannah {
+    &__sun {
+      bottom: 3vh;
+    }
+  }
+}
+
+@media (max-width: $tablet-width) {
+  .savannah {
+    &__word {
+      top: 8%;
+    }
+
+    &__sun {
+      bottom: 1vh;
+    }
+  }
+}
